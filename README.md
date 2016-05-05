@@ -7,6 +7,7 @@ Setup bare git-repositors.
 `git_server_user_keys`: list with users
 `git_server_repos`: list with repository names 
 `git_server_lookup_keys`: path to users public keys
+`git_home`: git user's home directory
 
 #Dependencies
 
