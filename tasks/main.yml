@@ -18,12 +18,13 @@
   user:
     name: git
     state: present
+    home: "{{git_home}}"
     shell: /usr/bin/git-shell
 
 
 - name: create git-shell-commands directory
   file:
-    name: /home/git/git-shell-commands
+    name: "{{git_home}}/git-shell-commands"
     state: directory 
     mode: 0755
     owner: git
@@ -32,7 +33,7 @@
 
 - name: create no-interactive-login
   template:
-    dest: /home/git/git-shell-commands/no-interactive-login
+    dest: "{{git_home}}/git-shell-commands/no-interactive-login"
     src: no-interactive-login.j2
     mode: 755 
     owner: git
@@ -49,7 +50,7 @@
 
 - name: init repositories path
   file:
-    name: /home/git/repo
+    name: "{{git_home}}/repos"
     state: directory 
     mode: 0755
     owner: git
@@ -58,7 +59,7 @@
 
 - name: create repositories path
   file:
-    name: /home/git/repos/{{item}}.git
+    name: "{{git_home}}/repos/{{item}}.git"
     state: directory 
     mode: 0755
     owner: git
@@ -71,8 +72,8 @@
   become_user: git
   command: git init --bare
   args:
-    chdir: "/home/git/repos/{{item}}.git"
-    creates: "/home/git/repos/{{item}}.git/HEAD"
+    chdir: "{{git_home}}/repos/{{item}}.git"
+    creates: "{{git_home}}/repos/{{item}}.git/HEAD"
   with_items:
     - "{{git_server_repos}}"
 

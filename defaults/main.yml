@@ -7,3 +7,5 @@ git_server_repos: []
 # lookup path for key files
 git_server_lookup_keys: "{{inventory_dir}}/files/public-keys"
 
+# base directory for git area
+git_home: "/home/git"
