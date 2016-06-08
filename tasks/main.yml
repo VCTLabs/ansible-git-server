@@ -93,4 +93,12 @@
     - "{{git_server_repos}}"
 
     
-    
+- name: allow read access to repositories by group members 
+  file:
+    name: "{{git_home}}"
+    state: directory 
+    mode: 0750
+    owner: git
+    group: git
+
+
